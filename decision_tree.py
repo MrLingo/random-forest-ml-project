@@ -1,3 +1,8 @@
+!apt-get install graphviz
+!pip install graphviz
+
+!mkdir dot
+
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -39,7 +44,7 @@ def draw_tree(t, df, size=10, ratio=0.6, precision=0):
     IPython.display.display(graphviz.Source(re.sub('Tree {',
        f'Tree {{ size={size}; ratio={ratio}', s)))
        
-       
+!wget https://raw.githubusercontent.com/Data-Science-FMI/ml-from-scratch-2019/master/data/house_prices_train.csv
        
 df_train = pd.read_csv('house_prices_train.csv')
 
