@@ -42,7 +42,6 @@ class RandomForest:
             self.tree_subset = []
             self.subsets.append(subset)
             self.dtree = tree.DecisionTreeClassifier()
-            # self.dtree = DecisionTreeRegressor()
             self.dtree.fit(X[subset], y)
             self.trees.append(self.dtree)
 
@@ -66,7 +65,7 @@ class RandomForest:
         return ans
 
 
-# Training set. Every column that contains only quantative data.
+# Training set. Every column that contains only quantitative data.
 X = dataframe[['MSSubClass', 'LotArea', 'OverallQual', 'YearBuilt', 'BedroomAbvGr',
                'FullBath', 'YrSold', 'MiscVal', 'YearRemodAdd', 'TotalBsmtSF', '1stFlrSF',
                '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath',
