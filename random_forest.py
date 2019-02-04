@@ -1,4 +1,23 @@
 from sklearn import tree
+import pandas as pd
+import random
+import csv
+from sklearn import metrics
+from math import sqrt
+from sklearn.metrics import mean_squared_error
+
+df_train = pd.read_csv('house_prices_train.csv')
+y = df_train['SalePrice']
+
+csv_filename = 'house_prices_train.csv'
+csv_test_filename = 'test.csv'
+dataframe = pd.read_csv(csv_filename)
+dataframe2 = pd.read_csv(csv_test_filename)
+
+# Root mean square error
+def rmse(h, y):
+  print (sqrt(mean_squared_error(h, y)))
+
 class RandomForest:
     def __init__(self, n_estimators):
         self.trees = []
@@ -14,112 +33,69 @@ class RandomForest:
         self.feature_subset_size = random.randrange(2, len(attr))
         for x in range(self.feature_subset_size):
             self.feature = random.choice(attr)
-            self.tree_subset.append(self.feature)  
+            self.tree_subset.append(self.feature)
         return self.tree_subset
 
-    
-    def fit(self,X , y):
-        for i in range(self.n_estimators):       
+    def fit(self, X, y):
+        for i in range(self.n_estimators):
             subset = self.get_random_subset(list(X))
             self.tree_subset = []
             self.subsets.append(subset)
             self.dtree = tree.DecisionTreeClassifier()
-           #self.dtree = DecisionTreeRegressor()
+            # self.dtree = DecisionTreeRegressor()
             self.dtree.fit(X[subset], y)
             self.trees.append(self.dtree)
-        
-    def predict_rf(self, x):
-      # Avoiding 'index out range' error
-      ans = []
-      for i in range(len(x)):
-        ans.append(0)
-        
-      treesNum = len(self.trees)
-      # Get array ( prediction ) from each tree and assign each value from it in the corresponding ans element
-      for i in range(treesNum):
-        tree_prediction = self.trees[i].predict(x[self.subsets[i]])
-        for j in range(len(tree_prediction)):
-          ans[j] += tree_prediction[j]
-          
-      # Get average    
-      for k in range(len(ans)):
-        ans[k] /= treesNum
-        
-      return ans
-      
-      
-      
-      
-      
-      # def fill_dataset_nan_with_avg(X):
-#   for i in list(X):
-#     print(x[i])
-#     X[i] = X[i].fillna((X[i].mean()))
 
+    def predict_rf(self, x):
+        # Avoiding 'index out range' error
+        ans = []
+        for i in range(len(x)):
+            ans.append(0)
+
+        treesNum = len(self.trees)
+        # Get array ( prediction ) from each tree and assign each value from it in the corresponding ans element
+        for i in range(treesNum):
+            tree_prediction = self.trees[i].predict(x[self.subsets[i]])
+            for j in range(len(tree_prediction)):
+                ans[j] += tree_prediction[j]
+
+        # Get average
+        for k in range(len(ans)):
+            ans[k] /= treesNum
+
+        return ans
+
+
+# Training set. Every column that contains only quantative data.
 X = dataframe[['MSSubClass', 'LotArea', 'OverallQual', 'YearBuilt', 'BedroomAbvGr',
                'FullBath', 'YrSold', 'MiscVal', 'YearRemodAdd', 'TotalBsmtSF', '1stFlrSF',
                '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath',
                'HalfBath', 'TotRmsAbvGrd', 'Fireplaces', 'GarageArea', 'GarageCars', 'OpenPorchSF',
                'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold']]
 
-
-
-
-
+# Run the forest with 10 trees
 random_forest = RandomForest(10)
 random_forest.fit(X, y)
 preds = random_forest.predict_rf(X)
 
-
 metrics.r2_score(y, preds)
-
-
-metrics.r2_score(y, preds)
-
-
 rmse(preds, y)
 
-# Sending to kaggle
-
-csv_filename = 'house_prices_test.csv'
-dataframe2 = pd.read_csv(csv_filename)
-
-# X_test = pd.read_csv('house_prices_test.csv')
-# print(dataframe2)
-# Y_test = X_test[['SalePrice']]
-
+# Test set.
 X_test = dataframe2[['MSSubClass', 'LotArea', 'OverallQual', 'YearBuilt', 'BedroomAbvGr',
                'FullBath', 'YrSold', 'MiscVal', 'YearRemodAdd', 'TotalBsmtSF', '1stFlrSF',
                '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath',
                'HalfBath', 'TotRmsAbvGrd', 'Fireplaces', 'GarageArea', 'GarageCars', 'OpenPorchSF',
                'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold']]
 
+
 X_test = X_test.fillna(0)
-# X_test.isnull().any()
-# len(Y_test)
-
-
-
 pred_test = random_forest.predict_rf(X_test)
+#print(pred_test)
 
-pred_test
-
-# metrics.r2_score(y, pred_test)
-# len(y)
-# len(pred_test)
-
-
+# Sending to kaggle
 submission = pd.DataFrame({'Id': dataframe2.Id, 'SalePrice': pred_test})
-submission
-
-
-submission.to_csv('submission.csv', index=False)
-
-from google.colab import files
-files.download('submission.csv')
-
-
-
+print(submission)
 
 
 
