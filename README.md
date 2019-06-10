@@ -1,5 +1,3 @@
-## It is highly preferable to run the script inside PyCharm or similar IDE that supports Python. 
-
 # Random Forest algorithm.
 The script is trying to predict the real estate sales price of a house depending on quantitative features about the house and sale. 
 
