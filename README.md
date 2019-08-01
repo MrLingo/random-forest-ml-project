@@ -7,7 +7,7 @@ PyCharm IDE strongly recommended, but other IDE that supporst Python will be suf
 Pandas   
 Sci-kit  
 
-## Getting Started
+## Getting Started  
 1. Open PyCharm  
 2. `File/New Project...`  
 3. Choose directory -> `Create`  
