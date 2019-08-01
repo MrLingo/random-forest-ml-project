@@ -8,8 +8,8 @@ Pandas
 Sci-kit  
 
 ## Getting Started
-1.Open PyCharm 
-2.`File/New Project...`
-3.Choose directory -> `Create`
+1.Open PyCharm  
+2.`File/New Project...`  
+3.Choose directory -> `Create`  
 4.Go to the now created project folder and put the files from the repository there.
 
