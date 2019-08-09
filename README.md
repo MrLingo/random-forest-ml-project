@@ -10,6 +10,7 @@ The script is trying to predict the real estate sales price of a house depending
 ## Getting started:
 1. Locate IDLE ( the integrated development environment for Python)
 2. `File` -> `Open...` -> select random_forest.py
+3. In the new window -> `Run` -> `Run Module`
 
 ## Installing Pip and Matplotlib:
 
