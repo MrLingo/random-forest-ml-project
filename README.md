@@ -2,14 +2,16 @@
 The script is trying to predict the real estate sales price of a house depending on quantitative features about the house and sale. 
 
 ## Prerequisites
-Python 3.7  
-PyCharm IDE strongly recommended, but other IDE that supporst Python will be sufficient enough.  
-Pandas   
-Sci-kit  
+- Python 3.7  
+- pip3 
+- Pandas   
+- Sci-kit  
 
-## Getting Started  
-1. Open PyCharm  
-2. `File/New Project...`  
-3. Choose directory -> `Create`  
-4. Go to the now created project folder and put the files from the repository there.
+## Getting started:
+1. Locate IDLE ( the integrated development environment for Python)
+2. `File` -> `Open...` -> select random_forest.py
 
+## Installing Pip and Matplotlib:
+
+`python -m pip install -U pip`  
+`python -m pip install -U matplotlib`
