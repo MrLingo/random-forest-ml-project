@@ -11,7 +11,7 @@ The script is trying to predict the real estate sales price of a house depending
 2. `File` -> `Open...` -> select random_forest.py
 3. In the new window -> `Run` -> `Run Module`
 
-## Installing the third-party packages:
-pip3 install pandas --user
-pip3 install scikit-learn --user
-pip3 install numpy --user
+## Installing the third-party packages:  
+`pip3 install pandas --user`  
+`pip3 install scikit-learn --user`  
+`pip3 install numpy --user`  
