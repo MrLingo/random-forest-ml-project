@@ -95,9 +95,3 @@ pred_test = random_forest.predict_rf(X_test)
 # Sending to kaggle
 submission = pd.DataFrame({'Id': dataframe2.Id, 'SalePrice': pred_test})
 print(submission)
-
-
-
-
-
-      
